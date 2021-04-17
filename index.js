@@ -16,7 +16,8 @@ const resolvers = require('./graphql/resolvers');
 //Setting Up Our Apollo Server.
 const server = new ApolloServer({
     typeDefs,
-    resolvers
+    resolvers,
+    context: ({ req }) => ({ req })
 });
 
 //Connecting To MongoDB
