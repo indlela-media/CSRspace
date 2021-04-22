@@ -1,5 +1,3 @@
-//STOPPED AT 45:00 MINS!!!!!!!!
-
 //Requiring Our Dependencies.
 const { ApolloServer } = require('apollo-server');
 const mongoose = require('mongoose');
