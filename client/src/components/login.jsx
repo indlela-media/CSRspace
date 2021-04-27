@@ -1,19 +1,23 @@
-import React, { useState } from 'react'
-import { useMutation } from '@apollo/react-hooks'
+//STOPPED AT 3:35:41
+import React, { useContext, useState } from 'react';
+import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 
+import { AuthContext } from '../context/Auth';
 import { useForm } from '../util/hooks';
 
 export default function Login(props) {
-    const [errors, setErrors ] = useState({});
+    const context = useContext(AuthContext);
+    const [errors, setErrors] = useState({});
 
     const {onChange, onSubmit, values } = useForm(loginUserCallback, {
         username: "",
         password: ""
-    })
+    });
 
     const [loginUser, { loading }] = useMutation(LOGIN_USER, {
-        update(_, result){
+        update(_, {data: {login: userData}}){
+            context.login(userData); //User Data
             props.history.push('/');
         },
         onError(err){
