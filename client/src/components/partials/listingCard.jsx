@@ -3,19 +3,17 @@ import { NavLink } from 'react-router-dom';
 import moment from 'moment';
 
 
-function listingCard({ post: { body, createdAt, id, username } }) {
+function listingCard({ post: { name, summary, createdAt, id } }) {
     
     return (
         <div>
-            <div className="d-flex flex-row justify-content-center">
-                <p className="media-body pb-3 mb-0 small lh-125  border-gray blackText">
-                <strong className="d-block blackText">{username}</strong><br/>
+            <img src="" alt="" />
+            <div className="p-3">
+                <h5>{name}</h5>
                 <small>{moment(createdAt).fromNow()}</small>
-                <p>{body}</p>
-                </p>
+                <p className="media-body pb-3 mb-0 small lh-125 blackText w-80">{summary}</p>
+                <NavLink to={`/posts/${id}`} class="btn btn-sm btn-primary mb-2">Read more</NavLink>
             </div>
-
-            <NavLink to={`/posts/${id}`} class="btn btn-sm btn-primary mb-2">Read more</NavLink>
         </div>
     )
 }

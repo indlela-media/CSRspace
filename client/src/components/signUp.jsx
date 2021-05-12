@@ -5,9 +5,11 @@ import gql from 'graphql-tag';
 import { AuthContext } from '../context/Auth';
 import { useForm } from '../util/hooks';
 
+import signUpImage from '../img/signUp.svg'
+
 export default function SignUp(props) {
     const context = useContext(AuthContext);
-    const [errors, setErrors ] = useState({});
+    const [ errors, setErrors ] = useState({});
 
     const { onChange, onSubmit, values } = useForm (registerUser, {
             username: "",
@@ -41,7 +43,7 @@ export default function SignUp(props) {
                     <div className="d-flex justify-content-center align-items-center row mt-5">
                         <div className="d-none d-sm-none d-md-none d-lg-block d-xl-block col-lg-5 col-xl-5 whiteText overflowHidden">
                             <div className="mr-1 animate__animated animate__fadeInLeft">
-                                <img className="img-fluid" src="./img/signUp.svg"/>
+                                <img className="img-fluid" src={signUpImage}/>
                             </div>
                         </div>
             
@@ -52,7 +54,7 @@ export default function SignUp(props) {
                                     <img className="mb-3 img-fluid" src="./img/logoWhite.png" alt="" width="80" />
                                 </div>
                                 <h4 className="mb-3 text-center d-sm-block d-md-block d-lg-none d-xl-none col-lg-6 col-xl-6">Welcome! sign up.</h4>
-                                <p className="text-center"><small>Already a user? <a href="#">Login here</a></small></p>
+                                <p className="text-center"><small>Not a user? <a href="#">Signup here</a></small></p>
             
 {/*                                 <label for="inputName" className="sr-only">Name</label>
                                 <input name="name"  type="text" id="inputName" className="form-control mb-2" placeholder="Name" required="" autofocus=""/>

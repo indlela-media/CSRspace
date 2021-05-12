@@ -6,6 +6,8 @@ import gql from 'graphql-tag';
 import { AuthContext } from '../context/Auth';
 import { useForm } from '../util/hooks';
 
+import logInImage from '../img/logIn.svg';
+
 export default function Login(props) {
     const context = useContext(AuthContext);
     const [errors, setErrors] = useState({});
@@ -38,7 +40,7 @@ export default function Login(props) {
                     <div className="d-flex justify-content-center align-items-center row mt-5">
                         <div className="d-none d-sm-none d-md-none d-lg-block d-xl-block col-lg-5 col-xl-5 whiteText overflowHidden">
                             <div className="mr-1 animate__animated animate__fadeInLeft">
-                                <img className="img-fluid" src="./img/logIn.svg" />
+                                <img className="img-fluid" src={logInImage} />
                             </div>
                         </div>
             

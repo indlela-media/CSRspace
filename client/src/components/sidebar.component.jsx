@@ -1,9 +1,11 @@
+//REACT Dependencies
 import React from 'react'
 import { NavLink, withRouter } from 'react-router-dom';
-import '../main.css'
+import '../main.css';
 import profilePicture from '../img/BlueShirtPic.jpg'
 
-const sidebar = (props) => {
+//Sidebar Functional Component
+const sidebar = ({ logout }) => {
     return (
         <nav id="sidebarMenu" className="col-md-3 col-lg-2 d-md-block sidebar collapse">
                 <div className="sidebar-sticky pt-3 leftColumn">
@@ -18,7 +20,7 @@ const sidebar = (props) => {
 
                     <div className="pt-3">
                         <ul>
-                            <div className="dashLink pb-3">
+{/*                             <div className="dashLink pb-3">
                                 <NavLink to="/dashboard">
                                     <i className="fa fa-bar-chart-o mr-1"></i>Dasboard
                                 </NavLink>
@@ -28,7 +30,7 @@ const sidebar = (props) => {
                                 <NavLink to="/fundingRequests">
                                     <i className="fa fa-diamond mr-1"></i>Funding Requests
                                 </NavLink>
-                            </div>
+                            </div> */}
 
                             <div className="dashLink pb-3">
                                 <NavLink to="/csiNetwork">
@@ -36,11 +38,11 @@ const sidebar = (props) => {
                                 </NavLink>
                             </div>
 
-                            <div className="dashLink pb-3">
+{/*                             <div className="dashLink pb-3">
                                 <NavLink to="/bugetingTools">
                                     <i className="fa fa-address-book-o mr-1"></i>Budgeting Tools
                                 </NavLink>
-                            </div>
+                            </div> */}
 
                             <div className="dashLink pb-3">
                                 <NavLink to="/myProfile">
@@ -64,9 +66,9 @@ const sidebar = (props) => {
                     <div className="pt-1">
                         <ul>
                             <div className="dashLink pb-2">
-                                <a href="/">
+                                <NavLink onClick={logout} to="/">
                                     <button className="btn btn-secondary">Log Out</button>
-                                </a>
+                                </NavLink>
                             </div>
                         </ul>
                     </div>

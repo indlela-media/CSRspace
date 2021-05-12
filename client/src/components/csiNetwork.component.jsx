@@ -1,7 +1,17 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom';
+//React Dependencies
+import React, { useContext } from 'react'
+import ListingCard from './partials/listingCard';
 
-export default function csiNetwork() {
+//GraphQL & Apollo Dependencies
+import { AuthContext } from '../context/Auth';
+import { useQuery } from '@apollo/react-hooks';
+import { FETCH_POSTS_QUERY } from '../util/graphql';
+
+//CSI Network Functional Component
+export default function CsiNetwork() {
+    const { user } = useContext(AuthContext);
+    const { loading, data } = useQuery(FETCH_POSTS_QUERY);
+
     return (
             <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-md-4 pt-5" id="csiNetwork">
                 <div className="pt-3">
@@ -12,51 +22,21 @@ export default function csiNetwork() {
 
                         <div className="col-sm-12 col-md-12 col-lg-12 col-xl-12 m-2 ">
                             <div className="p-3 ">
-                                <h5 className="border-bottom border-gray pb-2 mb-0">Grant Listings <span class="badge badge-pill badge-info">3</span></h5>
+                                <h5 className="border-bottom border-gray pb-2 mb-0">Grant Listings <span class="badge badge-pill badge-info">{loading ? (`0`) : (data.getPosts.length)}</span></h5>
 
-                                <div className="media text-muted pt-3 mt-2 statOne ">
-                                  <img src="" alt="" />
-                                  <div className="p-3">
-                                    <p className="media-body pb-3 mb-0 small lh-125 blackText w-80">
-                                      <strong className="d-block blackText">Big Shot Investments</strong>
-                                      We are looking for a small business with a passion of A, B & C and who are well rounded with D, E & F. Requirements are A, B , AC ,DD, VE...
-                                    </p>
-                                    <NavLink to="/grantUniqueId" class="btn btn-sm btn-primary mb-2">
-                                      Read more
-                                    </NavLink>
-                                  </div>
-                                </div>
+                                {loading ? (
+                                  <h1>Loading Posts</h1>
+                                ) : (
+                                  data.getPosts && data.getPosts.reverse().map((post) => (
+                                    <div key={post.id} className="media text-muted m-2 d-flex flex-column p-3 statOne ">
+                                      <ListingCard post={post}/>
+                                    </div>
+                                  ))
+                                )}
 
-                                <div className="media text-muted pt-3 mt-2 statOne">
-                                  <img src="" alt="" />
-                                  <div className="p-3">
-                                    <p className="media-body pb-3 mb-0 small lh-125 blackText w-80">
-                                      <strong className="d-block blackText">The Grand Funders</strong>
-                                      We are looking for a small business with a passion of A, B & C and who are well rounded with D, E & F. Requirements are A, B , AC ,DD, VE...
-                                    </p>
-                                    <NavLink to="/grantUniqueId" class="btn btn-sm btn-primary mb-2">
-                                      Read more
-                                    </NavLink>
-                                  </div>
-                                </div>
-
-                                <div className="media text-muted pt-3 mt-2 statOne">
-                                  <img src="" alt="" />
-                                  <div className="p-3">
-                                    <p className="media-body pb-3 mb-0 small lh-125 blackText w-80">
-                                      <strong className="d-block blackText">Generosity League</strong>
-                                      We are looking for a small business with a passion of A, B & C and who are well rounded with D, E & F. Requirements are A, B , AC ,DD, VE...
-                                    </p>
-
-                                    <NavLink to="/grantUniqueId" class="btn btn-sm btn-primary mb-2">
-                                      Read more
-                                    </NavLink>
-                                  </div>
-                                </div>
-
-                                <small className="d-block text-right mt-3">
+{/*                                 <small className="d-block text-right mt-3">
                                   <a href="/">More listings</a>
-                                </small>
+                                </small> */}
                               </div>
                         </div>
 

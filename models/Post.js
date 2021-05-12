@@ -1,7 +1,10 @@
 const { model, Schema } = require('mongoose');
 
 const postSchema = new Schema({
+    name: String,
+    summary: String,
     body: String,
+    link: String, //Google Drive Link
     username: String,
     createdAt: String,
     comments: [
