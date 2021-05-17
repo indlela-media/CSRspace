@@ -18,7 +18,7 @@ const server = new ApolloServer({
     context: ({ req }) => ({ req })
 });
 
-//Connecting To MongoDB
+//Connecting To MongoDB Database
 mongoose.connect(process.env._URI, {useNewUrlParser: true, useUnifiedTopology: true})
     .then(() => {
         console.log('MongoDB Connected')
