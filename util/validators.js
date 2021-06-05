@@ -1,18 +1,13 @@
 //Register Form Validator
 module.exports.validateRegisterInput = (
-    username,
     email,
     password,
     confirmPassword
 ) => {
     const errors = {};
 
-    if(username.trim() === '') {
-        errors.username = 'Username must not be empty';
-    }
-
     if(email.trim() === '') {
-        errors.username = 'Username must not be empty';
+        errors.email = 'Email must not be empty';
     }
 
     else {
@@ -24,7 +19,7 @@ module.exports.validateRegisterInput = (
     }
 
     if (password === '') {
-        errors.password = 'Password myst not be empty';
+        errors.password = 'Password must not be empty';
     }
 
     else if(password !== confirmPassword) {
@@ -38,11 +33,11 @@ module.exports.validateRegisterInput = (
 }
 
 //Login Form Validator
-module.exports.validateLoginInput = (username, passowrd) => {
+module.exports.validateLoginInput = (email, passowrd) => {
     const errors = {};
 
-    if(username.trim() === '') {
-        errors.username = 'Username must not be empty';
+    if(email.trim() === '') {
+        errors.email = 'Email must not be empty';
     }
 
     if(passowrd.trim() === '') {
