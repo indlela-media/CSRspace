@@ -29,17 +29,42 @@ module.exports = gql`
 
     type User{
         id: ID!
+
+        organization_name: String!
+        category: String!
+        organization_type: String!
         email: String!
+        phone_number: String!
+        registration_number: String!
+        password: String!
+
+        representative: [Rep_Info]!
+        org_documents: [NPO_Docs]!
+
         token: String!
-        username: String!
         createdAt: String!
     }
 
+    type Rep_Info{
+        rep_name: String!
+        rep_email: String!
+        rep_number: String!
+        org_website: String!
+    }
+
+    type NPO_Docs{
+        press_kit: String!
+        bbe_cert: String!
+        reg_cert: String!
+        sec_18a_cert: String!
+        annual_report: String!
+        founding_docs: String!
+    }
+
     input RegisterInput{
-        username: String!
+        email: String!
         password: String!
         confirmPassword: String!
-        email: String!
     }
 
     type Query{
@@ -49,7 +74,7 @@ module.exports = gql`
 
     type Mutation{
         register(registerInput: RegisterInput): User!
-        login(username: String!, password: String!): User!
+        login(email: String!, password: String!): User!
         createPost(name: String! summary: String! body: String! link: String!): Post!
         deletePost(postId: ID!): String!
         likePost(postId: ID!): Post!

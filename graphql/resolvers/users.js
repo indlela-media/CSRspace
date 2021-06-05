@@ -1,5 +1,3 @@
-///STOPED AT 1:10:00
-
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { UserInputError } = require('apollo-server');
@@ -12,20 +10,19 @@ function generateToken(user) {
     return jwt.sign({
         id: user.id,
         email: user.email,
-        username: user.username
     }, process.env.SECRET_KEY, {expiresIn: '1h'});
 }
 
 module.exports = {
     Mutation: {
-        async login(_, { username, password }){
-            const { errors, valid } = validateLoginInput(username, password);
+        async login(_, { email, password }){
+            const { errors, valid } = validateLoginInput(email, password);
             
             if(!valid){
                 throw new UserInputError('Error', { errors });
             }
 
-            const user = await User.findOne({ username });
+            const user = await User.findOne({ email });
 
             if(!user){
                 errors.general = 'User not found';
@@ -48,21 +45,21 @@ module.exports = {
             }
         },
 
-        async register(_, { registerInput: {username, email, password, confirmPassword }}) {
+        async register(_, { registerInput: {email, password, confirmPassword }}) {
             //Validate User Data
-            const { valid, errors } = validateRegisterInput(username, email, password, confirmPassword);
+            const { valid, errors } = validateRegisterInput(email, password, confirmPassword);
 
             if(!valid) {
                 throw new UserInputError('Errors', { errors });
             }
 
             //Make Sure User Doesnt Already Exist
-            const user = await User.findOne({ username });
+            const user = await User.findOne({ email });
 
             if (user) {
-                throw new UserInputError('Username is taken', {
+                throw new UserInputError('Email is taken', {
                     errors: {
-                        username: 'This username is taken'
+                        email: 'This email is taken'
                     }
                 })
             }
@@ -72,7 +69,6 @@ module.exports = {
 
             const newUser = new User({
                 email,
-                username,
                 password,
                 createdAt: new Date().toISOString()
             });
